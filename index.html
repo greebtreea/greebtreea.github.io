@@ -245,6 +245,30 @@
   .light-mode footer { border-top-color: rgba(0,0,0,0.08); }
   .light-mode section:nth-of-type(even) .section-bg { background: rgba(0,0,0,0.015); }
 
+  /* ===== Study materials ===== */
+  .study-list { display: flex; flex-direction: column; gap: 16px; max-width: 900px; }
+  .study-item {
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 12px;
+    padding: 20px 26px; transition: transform .2s, box-shadow .2s;
+  }
+  .study-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(80,0,202,0.12); }
+  .study-date { font-weight: 900; color: #a879ff; min-width: 76px; font-size: 0.95rem; }
+  .study-body { flex: 1; min-width: 200px; }
+  .study-body h3 { font-size: 1.02rem; font-weight: 900; }
+  .study-body p { font-size: 0.88rem; opacity: 0.7; margin-top: 4px; }
+  .study-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--dark-border); border-radius: 8px; padding: 9px 18px;
+    font-weight: 700; font-size: 0.88rem; color: #fff; transition: border-color .2s, background .2s;
+  }
+  .study-link:hover { border-color: var(--accent); background: rgba(80,0,202,0.10); }
+  .study-link svg { width: 16px; height: 16px; fill: currentColor; }
+  .study-note { max-width: 900px; opacity: 0.75; margin: -24px 0 30px; font-size: 0.95rem; }
+  .light-mode .study-item { background: var(--light-card); border-color: rgba(0,0,0,0.10); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .light-mode .study-date { color: var(--accent); }
+  .light-mode .study-link { color: #0d1116; border-color: rgba(0,0,0,0.15); }
+
   @media (max-width: 860px) {
     .nav-links { display: none; }
     .timeline::before { left: 21px; }
@@ -258,7 +282,7 @@
 </style>
 </head>
 <body>
-<div class="main-container dark-mode" id="app">
+<div class="main-container light-mode" id="app">
 
   <nav>
     <div class="nav-logo">Minhyeok<span>.</span>Choi</div>
@@ -268,15 +292,12 @@
         <li><a href="#history" data-i18n="nav_history">이력</a></li>
         <li><a href="#projects" data-i18n="nav_projects">프로젝트</a></li>
         <li><a href="#publications" data-i18n="nav_pubs">논문</a></li>
+        <li><a href="#study" data-i18n="nav_study">스터디</a></li>
         <li><a href="#contact" data-i18n="nav_contact">연락처</a></li>
       </ul>
       <button class="nav-btn" id="langToggle" aria-label="Switch language" title="한국어 / English">
         <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm7.93 9h-3.02a15.7 15.7 0 0 0-1.3-5.6A8.03 8.03 0 0 1 19.93 11zM12 4.04c.9 1.32 1.62 3.1 1.9 4.96h-3.8c.28-1.86 1-3.64 1.9-4.96zM4.07 13h3.02c.14 1.96.6 3.9 1.3 5.6A8.03 8.03 0 0 1 4.07 13zm3.02-2H4.07a8.03 8.03 0 0 1 4.32-5.6 15.7 15.7 0 0 0-1.3 5.6zM12 19.96c-.9-1.32-1.62-3.1-1.9-4.96h3.8c-.28 1.86-1 3.64-1.9 4.96zm2.1-6.96H9.9a13.7 13.7 0 0 1 0-2h4.2a13.7 13.7 0 0 1 0 2zm.5 6.6c.7-1.7 1.16-3.64 1.3-5.6h3.02a8.03 8.03 0 0 1-4.32 5.6z"/></svg>
         <span id="langLabel">EN</span>
-      </button>
-      <button class="nav-btn" id="modeToggle" aria-label="Toggle dark/light mode">
-        <svg id="iconSun" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5h.01L13 4.06h-2L11.99 2H12zm0 20h.01L13 24.06h-2l.99-2.06H12zM2 11v2H0v-2h2zm22 0v2h-2v-2h2zM4.22 3.22l1.42 1.42-1.42 1.42L2.8 4.64l1.42-1.42zm15.56 0 1.42 1.42-1.42 1.42-1.42-1.42 1.42-1.42zM5.64 18.36l-1.42 1.42-1.42-1.42 1.42-1.42 1.42 1.42zm14.14 0 1.42 1.42-1.42 1.42-1.42-1.42 1.42-1.42zM13 0v3h-2V0h2zm0 21v3h-2v-3h2z"/></svg>
-        <svg id="iconMoon" viewBox="0 0 24 24" style="display:none"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05z"/></svg>
       </button>
     </div>
   </nav>
@@ -406,6 +427,15 @@
     </div>
   </div></section>
 
+  <!-- ===== Study Materials ===== -->
+  <section id="study"><div class="section-bg">
+    <div class="items-container">
+      <h1 class="fade-in" data-i18n="st_title">스터디 자료</h1>
+      <p class="study-note fade-in" data-i18n="st_note">스터디 모임에서 발표한 자료를 정리해 올립니다.</p>
+      <div class="study-list" id="studyList"></div>
+    </div>
+  </div></section>
+
   <!-- ===== Contact ===== -->
   <section id="contact"><div class="section-bg">
     <div class="items-container">
@@ -427,10 +457,43 @@
 </div>
 
 <script>
+// ===== 스터디 자료 목록 =====
+// ▶ 새 자료 추가 방법 (2단계):
+//   1) PDF 파일을 assets/study/ 폴더에 넣는다.
+//      - 파일명은 영문 소문자와 하이픈(-) 사용 권장. 예: pytorch-textbook-ch06.pdf
+//   2) 아래 배열의 맨 위에 항목을 한 개 복사해서 붙여넣고 내용만 바꾼다.
+//      (맨 위에 넣으면 사이트에서 최신 자료가 가장 먼저 보입니다)
+const STUDY_MATERIALS = [
+  {
+    date: "2026.07",
+    file: "assets/study/pytorch-textbook-ch05.pdf",
+    ko: { title: "딥러닝 파이토치 교과서 · 5장", desc: "스터디 발표자료" },
+    en: { title: "Deep Learning with PyTorch Textbook · Ch. 5", desc: "Study group presentation" }
+  }
+];
+
+function renderStudy() {
+  const list = document.getElementById('studyList');
+  if (!list) return;
+  const viewLabel = I18N[lang].st_view;
+  list.innerHTML = STUDY_MATERIALS.map(m => {
+    const d = m[lang] || m.ko;
+    return `<div class="study-item">
+      <div class="study-date">${m.date}</div>
+      <div class="study-body"><h3>${d.title}</h3>${d.desc ? `<p>${d.desc}</p>` : ''}</div>
+      <a class="study-link" href="${m.file}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        ${viewLabel}
+      </a>
+    </div>`;
+  }).join('');
+}
+
 // ===== i18n =====
 const I18N = {
   ko: {
-    nav_expertise: "전문 분야", nav_history: "이력", nav_projects: "프로젝트", nav_pubs: "논문", nav_contact: "연락처",
+    nav_expertise: "전문 분야", nav_history: "이력", nav_projects: "프로젝트", nav_pubs: "논문", nav_study: "스터디", nav_contact: "연락처",
+    st_title: "스터디 자료", st_note: "스터디 모임에서 발표한 자료를 정리해 올립니다.", st_view: "PDF 보기",
     hero_name: "최민혁", hero_role: "기계공학과 학부연구생 · IDEA LAB", hero_univ: "한양대학교 ERICA캠퍼스",
     hero_interest_label: "관심 분야", hero_interest_tag: "방산 (국방산업)", hero_scroll: "↓ 스크롤하여 더 알아보기",
     exp_title: "전문 분야",
@@ -453,7 +516,8 @@ const I18N = {
     footer: "© 2026 최민혁 · Minhyeok Choi"
   },
   en: {
-    nav_expertise: "Expertise", nav_history: "History", nav_projects: "Projects", nav_pubs: "Publications", nav_contact: "Contact",
+    nav_expertise: "Expertise", nav_history: "History", nav_projects: "Projects", nav_pubs: "Publications", nav_study: "Study", nav_contact: "Contact",
+    st_title: "Study Materials", st_note: "Presentation materials from my study group, updated regularly.", st_view: "View PDF",
     hero_name: "Minhyeok Choi", hero_role: "Undergraduate Researcher, Mechanical Engineering · IDEA LAB", hero_univ: "Hanyang University ERICA Campus",
     hero_interest_label: "Research Interest", hero_interest_tag: "Defense Industry", hero_scroll: "↓ Scroll to explore",
     exp_title: "Expertise",
@@ -490,6 +554,7 @@ function applyLang() {
   langLabel.textContent = lang === 'ko' ? 'EN' : 'KO';
   document.getElementById('ghPending').title = lang === 'ko' ? 'GitHub — 업데이트 예정' : 'GitHub — to be updated';
   document.getElementById('liPending').title = lang === 'ko' ? 'LinkedIn — 업데이트 예정' : 'LinkedIn — to be updated';
+  renderStudy();
 }
 
 document.getElementById('langToggle').addEventListener('click', () => {
@@ -497,16 +562,7 @@ document.getElementById('langToggle').addEventListener('click', () => {
   applyLang();
 });
 
-// ===== Dark / Light mode =====
-const app = document.getElementById('app');
-const iconSun = document.getElementById('iconSun');
-const iconMoon = document.getElementById('iconMoon');
-document.getElementById('modeToggle').addEventListener('click', () => {
-  const dark = app.classList.toggle('light-mode') === false;
-  app.classList.toggle('dark-mode', dark);
-  iconSun.style.display = dark ? '' : 'none';
-  iconMoon.style.display = dark ? 'none' : '';
-});
+renderStudy();
 
 // ===== Fade-in on scroll =====
 const obs = new IntersectionObserver(entries => {
